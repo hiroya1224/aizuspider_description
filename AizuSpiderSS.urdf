@@ -1,0 +1,690 @@
+<?xml version="1.0" ?>
+<robot name="AizuSpiderSS" xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz" xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint" xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model" xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics" xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable" xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!-- link: CHASSIS -->
+  <link name="CHASSIS">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/CHASSIS.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual>
+      <!-- translation: [ -0.060, 0.094, 0.43050 ] -->
+      <origin  xyz="-0.06 0.094 0.4805 " rpy="0 0 0"/>
+      <geometry>
+        <box size="0.040 0.040 0.100" />
+      </geometry>
+    </visual>
+    <visual>
+      <!-- translation: [ -0.06320, -0.094, 0.43050 ] -->
+      <origin  xyz="-0.084 -0.094 0.463" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.040 0.065" />
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="-0.204 -0.094 0.463" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.040 0.040 0.065" />
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="-0.114 -0.094 0.5155" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.200 0.040 0.040" />
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="74.57048000000005"/>
+      <origin xyz="-0.047087 -0.000892 0.139822" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: R_TRACK -->
+  <link name="R_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/MAIN_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/MAIN_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.72034"/>
+      <origin xyz="0.000000 0.001760 0.002520" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: L_TRACK -->
+  <link name="L_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/MAIN_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/MAIN_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.72034"/>
+      <origin xyz="0.000000 -0.001760 0.002520" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FR_FLIPPER -->
+  <link name="FR_FLIPPER">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.7878900000000004"/>
+      <origin xyz="0.129731 0.003019 0.044868" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FR_SUB_TRACK -->
+  <link name="FR_SUB_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/SUB_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.21549"/>
+      <origin xyz="0.118520 0.000000 -0.000010" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FL_FLIPPER -->
+  <link name="FL_FLIPPER">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.7878900000000004"/>
+      <origin xyz="0.129731 0.003019 0.044868" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FL_SUB_TRACK -->
+  <link name="FL_SUB_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/SUB_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.21549"/>
+      <origin xyz="0.118520 0.000000 -0.000010" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: BR_FLIPPER -->
+  <link name="BR_FLIPPER">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.7878900000000004"/>
+      <origin xyz="-0.129731 -0.003019 0.044868" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: BR_SUB_TRACK -->
+  <link name="BR_SUB_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/SUB_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.21549"/>
+      <origin xyz="-0.118520 0.000000 -0.000010" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: BL_FLIPPER -->
+  <link name="BL_FLIPPER">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FLIPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.7878900000000004"/>
+      <origin xyz="-0.129731 -0.003019 0.044868" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: BL_SUB_TRACK -->
+  <link name="BL_SUB_TRACK">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/SUB_BELT.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.21549"/>
+      <origin xyz="-0.118520 0.000000 -0.000010" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: BASE -->
+  <link name="BASE">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/BASE_LOWER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/BASE_UPPER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="0 0 0.1565" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/RING_BIG.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.46734"/>
+      <origin xyz="0.125500 0.000000 0.000000" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: SHOULDER -->
+  <link name="SHOULDER">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/SHOULDER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <!--visual>
+      <origin  xyz="0 0.0015 0.119" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/RING_BIG.stl" scale="1 1 1"/>
+      </geometry>
+    </visual-->
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.7477"/>
+      <origin xyz="0.060500 -0.000000 -0.002000" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: ARM -->
+  <link name="ARM">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/ARM.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.99"/>
+      <origin xyz="-0.020650 0.000000 0.010000" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FOREARM -->
+  <link name="FOREARM">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FOREARM.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.6763"/>
+      <origin xyz="0.081000 -0.000000 -0.008600" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: WRIST1 -->
+  <link name="WRIST1">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/WRIST.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1785"/>
+      <origin xyz="0.064200 0.000000 0.037000" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: WRIST2 -->
+  <link name="WRIST2">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/WRIST.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1785"/>
+      <origin xyz="0.064143 -0.000000 0.037099" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: HAND -->
+  <link name="HAND">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/HAND.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/PALM.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER_BASE.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.727"/>
+      <origin xyz="0.060000 -0.000000 0.000000" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER1 -->
+  <link name="FINGER1">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 -0.000000 -0.018021" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER1_TIP -->
+  <link name="FINGER1_TIP">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER_TIP.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 -0.000000 -0.018021" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER2 -->
+  <link name="FINGER2">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 0.003315 0.017714" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER2_TIP -->
+  <link name="FINGER2_TIP">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER_TIP.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 0.003315 0.017714" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER3 -->
+  <link name="FINGER3">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 -0.003315 0.017714" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+<!-- link: FINGER3_TIP -->
+  <link name="FINGER3_TIP">
+    <visual>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aizuspider_description/mesh/FINGER_TIP.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin  xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0.012619 -0.003315 0.017714" rpy="0 0 0"/>
+      <inertia ixx="1.000000" ixy="0.000000" ixz="0.000000" iyy="1.000000" iyz="0.000000" izz="1.000000"/>
+    </inertial>
+  </link>
+  <!-- joint section -->
+  <joint name="R_TRACK" type="fixed">
+    <parent link="CHASSIS"/>
+    <child link="R_TRACK"/>
+    <origin xyz="0.000000 -0.146000 0.062000" rpy="0 0 0" />
+  </joint>
+  <joint name="L_TRACK" type="fixed">
+    <parent link="CHASSIS"/>
+    <child link="L_TRACK"/>
+    <origin xyz="0.000000 0.146000 0.062000" rpy="0 0 0" />
+  </joint>
+  <joint name="FR_FLIPPER" type="revolute">
+    <parent link="CHASSIS"/>
+    <child link="FR_FLIPPER"/>
+    <origin xyz="0.234000 -0.223500 0.062000" rpy="0 0 0" />
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-4.0" upper="4.0" velocity="5" effort="500"/>
+    <!--limit lower="-10000.000000" upper="10000.000000" velocity="5" effort="500"/-->
+  </joint>
+  <joint name="FR_SUB_TRACK" type="fixed">
+    <parent link="FR_FLIPPER"/>
+    <child link="FR_SUB_TRACK"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+  </joint>
+  <joint name="FL_FLIPPER" type="revolute">
+    <parent link="CHASSIS"/>
+    <child link="FL_FLIPPER"/>
+    <origin xyz="0.234000 0.223500 0.062000" rpy="0 0 0" />
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <!--limit lower="-4.0" upper="4.0" velocity="5" effort="500"/-->
+    <dynamics damping="0.0" friction="0.0"/>
+    <limit effort="30" velocity="1.0" lower="-2.2" upper="0.7" />
+    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
+  </joint>
+  <joint name="FL_SUB_TRACK" type="fixed">
+    <parent link="FL_FLIPPER"/>
+    <child link="FL_SUB_TRACK"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+  </joint>
+  <joint name="BR_FLIPPER" type="revolute">
+    <parent link="CHASSIS"/>
+    <child link="BR_FLIPPER"/>
+    <origin xyz="-0.234000 -0.223500 0.062000" rpy="0 0 3.14159265358979" />
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-4.0" upper="4.0" velocity="5" effort="500"/>
+    <!--limit lower="-10000.000000" upper="10000.000000" velocity="5" effort="500"/-->
+  </joint>
+  <joint name="BR_SUB_TRACK" type="fixed">
+    <parent link="BR_FLIPPER"/>
+    <child link="BR_SUB_TRACK"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+  </joint>
+  <joint name="BL_FLIPPER" type="revolute">
+    <parent link="CHASSIS"/>
+    <child link="BL_FLIPPER"/>
+    <origin xyz="-0.234000 0.223500 0.062000" rpy="0 0 3.14159265358979" />
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-4.0" upper="4.0" velocity="5" effort="500"/>
+    <!--limit lower="-10000.000000" upper="10000.000000" velocity="5" effort="500"/-->
+  </joint>
+  <joint name="BL_SUB_TRACK" type="fixed">
+    <parent link="BL_FLIPPER"/>
+    <child link="BL_SUB_TRACK"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0" />
+  </joint>
+  <joint name="BASE" type="fixed">
+    <parent link="CHASSIS"/>
+    <child link="BASE"/>
+    <origin xyz="-0.063200 -0.094000 0.515000"
+            rpy="1.57079632679490 0 1.57079632679490" />
+  </joint>
+  <joint name="SHOULDER" type="revolute">
+    <parent link="BASE"/>
+    <child link="SHOULDER"/>
+    <origin xyz="0 0 0.1565" rpy="0 0 0" />
+    <axis xyz="0.000000 0.000000 -1.000000"/>
+    <limit lower="-174.532925" upper="174.532925" velocity="5" effort="500"/>
+  </joint>
+  <joint name="ARM" type="revolute">
+    <parent link="SHOULDER"/>
+    <child link="ARM"/>
+    <origin xyz="0.0 0.0015 0.119" rpy="0 0 0" />
+    <axis xyz="0 -1.0 0"/>
+    <!--limit lower="0.872665" upper="5.410521" velocity="5" effort="500"/-->
+    <limit lower="-8" upper="8" velocity="5" effort="500"/>
+  </joint>
+  <joint name="FOREARM" type="revolute">
+    <parent link="ARM"/>
+    <child link="FOREARM"/>
+    <origin xyz="0 0 -0.410" rpy="0 0 0" />
+    <axis xyz="0 1.0 0"/>
+    <!--limit lower="0.331613" upper="5.951573" velocity="5" effort="500"/-->
+    <limit lower="-8" upper="8" velocity="5" effort="500"/>
+  </joint>
+  <joint name="WRIST1" type="revolute">
+    <parent link="FOREARM"/>
+    <child link="WRIST1"/>
+    <origin xyz="0  -0.01125 0.207" rpy="0 0 0" />
+    <axis xyz="0 0 -1.0"/>
+    <limit lower="-174.532925" upper="174.532925" velocity="5" effort="500"/>
+  </joint>
+  <joint name="WRIST2" type="revolute">
+    <parent link="WRIST1"/>
+    <child link="WRIST2"/>
+    <origin xyz="0 0.03725 0.06401"
+            rpy = "1.04719755119660 0.00000000000000 3.14159265358979"
+            />
+    <axis xyz="0 0 -1"/>
+    <limit lower="-174.532925" upper="174.532925" velocity="5" effort="500"/>
+  </joint>
+  <joint name="HAND" type="revolute">
+    <parent link="WRIST2"/>
+    <child link="HAND"/>
+    <origin xyz="0 0.03725 0.06401"
+            rpy = "-0.00000000000000 1.04719755119660 1.57079632679489"
+            />
+    <axis xyz="0 0 -1.0"/>
+    <limit lower="-174.532925" upper="174.532925" velocity="5" effort="500"/>
+  </joint>
+  <joint name="FINGER1" type="revolute">
+    <parent link="HAND"/>
+    <child link="FINGER1"/>
+    <origin xyz="0.031160 0 0.114980"
+            rpy = "0.00000000000000 -0.95993108859688 3.14159265358979"
+            />
+    <axis xyz="-0.0 1.0 0.0"/>
+    <limit lower="0.000000" upper="2.007129" velocity="5" effort="500"/>
+  </joint>
+  <joint name="FINGER1_TIP" type="fixed">
+    <parent link="FINGER1"/>
+    <child link="FINGER1_TIP"/>
+    <origin xyz="-0.003 0 0.044" rpy="0 0 0" />
+  </joint>
+  <joint name="FINGER2" type="revolute">
+    <parent link="HAND"/>
+    <child link="FINGER2"/>
+    <origin xyz="-0.02982 0.02277 0.1139"
+            rpy = "0.00000000000000 -0.95993108859688 -0.18500490071140"
+            />
+    <axis xyz="0.0 1 0.0" />
+    <limit lower="0.000000" upper="2.007129" velocity="5" effort="500"/>
+  </joint>
+  <joint name="FINGER2_TIP" type="fixed">
+    <parent link="FINGER2"/>
+    <child link="FINGER2_TIP"/>
+    <origin xyz="-0.003 0 0.044" rpy="0 0 0" />
+  </joint>
+  <joint name="FINGER3" type="revolute">
+    <parent link="HAND"/>
+    <child link="FINGER3"/>
+    <origin xyz="-0.02982 -0.02277 0.1139"
+            rpy = "-0.00000000000000 -0.95993108859688 0.18500490071140"
+            />
+    <axis xyz="000000 0.982935 0.183951"/>
+    <limit lower="0.000000" upper="2.007129" velocity="5" effort="500"/>
+  </joint>
+  <joint name="FINGER3_TIP" type="fixed">
+    <parent link="FINGER3"/>
+    <child link="FINGER3_TIP"/>
+    <origin xyz="-0.003 0 0.044" rpy="0 0 0" />
+  </joint>
+
+</robot>

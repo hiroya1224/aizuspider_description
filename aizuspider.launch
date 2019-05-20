@@ -1,0 +1,17 @@
+<launch>
+  <param name="/use_sim_time" value="true" />
+
+  <group ns="AizuSpider">
+    <param name="robot_description"
+           textfile="$(find aizuspider_description)/AizuSpiderSS.urdf" />
+    <rosparam command="load"
+              file="$(find aizuspider_description)/aizuspider_controller_settings.yaml" />
+    <node name="cm_spawner" pkg="controller_manager"
+          type="spawner" args="joint_state_controller rarm_controller
+                               rleg_controller lleg_controller" />
+  </group>
+
+  <node name="choreonoid" pkg="aizuspider_description" type="run_choreonoid.sh"
+        args="/home/leus/T1M-AizuSpiderSS.cnoid" />
+
+</launch>

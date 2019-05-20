@@ -1,0 +1,36 @@
+rarm:
+  - SHOULDER : rarm-shoulder-y
+  - ARM      : rarm-shoulder-p
+  - FOREARM  : rarm-elbow-p
+  - WRIST1   : rarm-wrist-r
+  - WRIST2   : rarm-wrist-p
+  - HAND     : rarm-wrist-y
+  - FINGER1  : rarm-hand-f1
+  - FINGER2  : rarm-hand-f2
+  - FINGER3  : rarm-hand-f2
+rleg:
+  - FR_FLIPPER : rleg-crotch-p
+  - BR_FLIPPER : rleg-knee-p
+lleg:
+  - FL_FLIPPER : lleg-crotch-p
+  - BL_FLIPPER : lleg-knee-p
+
+rarm-end-coords:
+  parent    : HAND
+  translate : [0.0,  0.0, 0.0]
+  rotate    : [ 1, 0, 0, 0]
+# rleg-end-coords:
+#   translate : [0.0, -0.035, -0.09]
+#   rotate    : [-0.283404137769, 0.916168532224, -0.283403096769, 95.010341341304]
+# lleg-end-coords:
+#   translate : [0.0, -0.035, -0.09]
+#   rotate    : [-0.283404137769, 0.916168532224, -0.283403096769, 95.010341341304]
+
+##
+## reset-pose
+##
+angle-vector:
+  reset-pose : [
+  -90, 50, 50,   0, 0, 0,  0, 0, 0,
+  0, 0,   0, 0,
+  ]
