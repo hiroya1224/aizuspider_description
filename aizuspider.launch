@@ -7,8 +7,8 @@
     <rosparam command="load"
               file="$(find aizuspider_description)/aizuspider_controller_settings.yaml" />
     <node name="cm_spawner" pkg="controller_manager"
-          type="spawner" args="joint_state_controller rarm_controller
-                               rleg_controller lleg_controller" />
+          type="spawner" args="joint_state_controller
+                               fullbody_controller" />
   </group>
 
   <node name="choreonoid" pkg="aizuspider_description" type="run_choreonoid.sh"

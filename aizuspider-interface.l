@@ -11,6 +11,7 @@
    (&rest args)
    (let ((r (instance AizuSpiderSS-robot :init)))
      ;; make controller configuration from joint-list
+     #|
      (dolist (limb (list 'rarm 'lleg 'rleg))
        (let ((key (intern (string limb) *keyword-package*))
              (mname (intern (string-upcase (format nil "~A-controller" limb)) *keyword-package*))
@@ -31,6 +32,7 @@
                )))
           )
          ))
+     |#
      ;;
      (send-super*
       :init
@@ -42,16 +44,32 @@
       :groupname "aizuspider_interface" args)
      )
    ;;
+   #|
    (dolist (ct (list :rarm-controller
                      :rleg-controller
                      :lleg-controller))
      (send self :add-controller ct :create-actions nil))
+   |#
    )
   ;;
+  #|
   (:default-controller nil
    (append (send self :rarm-controller)
            (send self :rleg-controller)
            (send self :lleg-controller))
+   )
+  |#
+  (:default-controller nil
+   (list
+    (list
+     (cons :controller-action "fullbody_controller/follow_joint_trajectory")
+     (cons :controller-state  "fullbody_controller/state")
+     (cons :action-type control_msgs::FollowJointTrajectoryAction)
+     (cons :joint-names (list "FR_FLIPPER" "FL_FLIPPER" "BR_FLIPPER" "BL_FLIPPER"
+                              "SHOULDER" "ARM" "FOREARM" "WRIST1" "WRIST2" "HAND"
+                              "FINGER1" "FINGER2" "FINGER3"
+                              ))
+     ))
    )
   #|
   (:rarm-controller nil
