@@ -11,7 +11,7 @@
                                fullbody_controller" />
   </group>
 
-  <node name="choreonoid" pkg="aizuspider_description" type="run_choreonoid.sh"
+  <node name="choreonoid" pkg="aizuspider_description" type="run_cnoid.sh"
         args="/home/leus/T1M-AizuSpiderSS.cnoid" />
 
 </launch>
