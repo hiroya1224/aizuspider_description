@@ -15,7 +15,7 @@ import yaml
 import argparse
 
 class SingleTrajectory:
-    def __init__(self, namespace='AizuSpider'):
+    def __init__(self, namespace='AizuSpiderAA'):
         self.act_ = actionlib.SimpleActionClient(
             '%s/fullbody_controller/follow_joint_trajectory'%(namespace),
             FollowJointTrajectoryAction,
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
     name  = args.name
     if not name:
-        name = 'AizuSpider'
+        name = 'AizuSpiderAA'
 
     filename  = args.file_name
     if not filename:
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     offset = args.offset
     if not offset:
-        offset = 0.0
+        offset = 2.0
     else:
         offset = float(offset)
 
