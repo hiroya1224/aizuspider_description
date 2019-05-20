@@ -1,0 +1,52 @@
+# Body pose sequence format version 1.0 defined by cnoid-Robotics
+## joints: のindexと関節名の関係
+# 0: FR_FLIPPER
+# 1: FL_FLIPPER
+# 2: BR_FLIPPER
+# 3: BL_FLIPPER
+# 4: SHOULDER
+# 5: ARM
+# 6: FOREARM
+# 7: WRIST1
+# 8: WRIST2
+# 9: HAND
+#10: FINGER1
+#11: FINGER2
+#12: FINGER3
+## time:
+## q:
+type: PoseSeq
+name: "PoseSeq"
+targetBody: "AizuSpider"
+refs:
+  - 
+    time: 0
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+      q: [ 
+        0, 0, 0, 0, 0, 3.14159265, 3.14159265, 0, 0, 0, 
+        0.959931089, 0.959931089, 0.959931089 ]
+  - 
+    time: 1
+    maxTransitionTime: 1
+    refer: 
+      type: Pose
+      name: ""
+      joints: [ 
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+      q: [ 
+        0, 0, 0, 0,
+        0, 1.57, 1.57, 0, 0, 0, 
+        0.0, 0.0, 0.0 ]
+  - 
+    time: 3
+    refer: 
+      type: Pose
+      name: "initial pose"
+      joints: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+      q: [ 
+        0, 0, 0, 0,
+        -1.570796326795, 0.872664625997, 0.872664625997, 0, 0, 0,
+        0.959931089, 0.959931089, 0.959931089 ]
