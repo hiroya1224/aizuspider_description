@@ -21,6 +21,7 @@ class SingleTrajectory:
             FollowJointTrajectoryAction,
         )
         self.act_.wait_for_server(rospy.Duration(10.0))
+
     def feedback(self, msg):
         pass
 
@@ -42,7 +43,7 @@ class SingleTrajectory:
             p.positions = qlst
             goal.trajectory.points.append(p)
 
-        goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(0.01)
+        goal.trajectory.header.stamp = rospy.Time.now() + rospy.Duration(0.1)
 
         print(goal.trajectory)
         self.act_.send_goal(goal, feedback_cb=self.feedback)
