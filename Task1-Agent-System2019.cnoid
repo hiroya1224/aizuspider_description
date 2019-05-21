@@ -12,13 +12,13 @@ items:
       data: 
         modelFile: "${SHARE}/WRS2018/model/I-50-2.0.body"
         currentBaseLink: "ROOT"
-        rootPosition: [ 16.5, 2.5, 1 ]
+        rootPosition: [ 16.5, 2.8, 1 ]
         rootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
           0, 0, 1 ]
         jointPositions: [  ]
-        initialRootPosition: [ 16.5, 2.5, 1 ]
+        initialRootPosition: [ 16.5, 2.8, 1 ]
         initialRootAttitude: [ 
           1, 0, 0, 
           0, 1, 0, 
