@@ -19,9 +19,9 @@
         )
     (send *robot* :angle-vector
           (send *ri* :state :reference-vector))
-    (send *robot* :rarm :hand-f1 :joint-angle pos)
-    (send *robot* :rarm :hand-f2 :joint-angle pos)
-    (send *robot* :rarm :hand-f3 :joint-angle pos)
+    (send *robot* :rarm :hand-f1 :joint-angle (rad2deg (elt pos 0)))
+    (send *robot* :rarm :hand-f2 :joint-angle (rad2deg (elt pos 1)))
+    (send *robot* :rarm :hand-f3 :joint-angle (rad2deg (elt pos 2)))
     (send *ri* :angle-vector (send *robot* :angle-vector) tm)
     (when wait
       (send *ri* :wait-interpolation))
@@ -34,13 +34,19 @@
          (send (car (send *robot* :links)) :copy-worldcoords))
         (move (send req :move))
         (wait (send req :wait))
+        (position-ik (send req :position_ik))
         (res (send req :response))
+        ret
         )
     (send tgt :transform cds)
 
     (send *robot* :angle-vector
           (send *ri* :state :reference-vector))
-    (when (send *robot* :rarm :inverse-kinematics cds)
+    (if position-ik
+        (setq ret (send *robot* :rarm :inverse-kinematics cds :rotation-axis nil))
+      (setq ret (send *robot* :rarm :inverse-kinematics cds))
+      )
+    (when ret
       (send res :success t)
       (send res :angles
             (send *robot* :angle-vector))
