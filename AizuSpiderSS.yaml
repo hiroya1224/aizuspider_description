@@ -7,7 +7,7 @@ rarm:
   - HAND     : rarm-wrist-y
   - FINGER1  : rarm-hand-f1
   - FINGER2  : rarm-hand-f2
-  - FINGER3  : rarm-hand-f2
+  - FINGER3  : rarm-hand-f3
 rleg:
   - FR_FLIPPER : rleg-crotch-p
   - BR_FLIPPER : rleg-knee-p

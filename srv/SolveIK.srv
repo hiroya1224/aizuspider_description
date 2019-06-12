@@ -1,0 +1,6 @@
+geometry_msgs/Pose pose
+int32 move
+bool wait
+---
+bool success
+float64[] angles
