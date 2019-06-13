@@ -9,11 +9,18 @@
     <node name="$(anon cm_spawner)" pkg="controller_manager"
           type="spawner" args="joint_state_controller
                                fullbody_controller" />
+
     <node name="robot_state_publisher_AA" pkg="robot_state_publisher"
           type="state_publisher">
       <param name="tf_prefix" value="AizuSpiderAA" />
     </node>
   </group>
+  <node name="aizuspider_ros_supportAA" pkg="roseus" type="roseus"
+        args="$(find aizuspider_description)/aizuspider-ros-support.l"
+        output="screen">
+      <param name="namespace" value="AizuSpiderAA"/>
+  </node>
+
   <ggroup ns="AizuSpiderBB">
     <param name="robot_description"
            textfile="$(find aizuspider_description)/AizuSpiderSS.urdf" />
