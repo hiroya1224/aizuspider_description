@@ -97,6 +97,22 @@
      ))
    )
   |#
+  (:start-grasp
+   (&rest args &key (tm 1000) (position 90) &allow-other-keys)
+   (let ((av (send self :state :reference-vector)))
+     (setf (elt av 6) position)
+     (setf (elt av 7) position)
+     (setf (elt av 8) position)
+     (send *ri* :angle-vector av tm)
+     ))
+  (:stop-grasp
+   (&rest args &key (tm 1000) &allow-other-keys)
+   (let ((av (send self :state :reference-vector)))
+     (setf (elt av 6) 0)
+     (setf (elt av 7) 0)
+     (setf (elt av 8) 0)
+     (send *ri* :angle-vector av tm)
+   ))
   )
 
 (defun aizuspider-init (&rest args &key (namespace "AizuSpider") &allow-other-keys)
