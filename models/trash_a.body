@@ -1,0 +1,25 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: trash_a
+
+links:
+  -
+    name: BASE
+    jointType: free
+    elements:
+      type: Transform
+      elements:
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.06, 0.06, 0.18 ] }
+          translation: [ 0, 0, 0.09 ]
+          appearance: { material: { diffuseColor: [ 0.8, 0.2, 0.2 ] } }
+        -
+          type: RigidBody
+          centerOfMass: [ 0, 0, 0.09 ]
+          mass: 2.0
+          inertia: [
+            0.3,  0, 0,
+            0,  0.3, 0,
+            0,    0, 0.1 ]

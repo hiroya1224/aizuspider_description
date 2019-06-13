@@ -1,0 +1,40 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: trash_c
+
+links:
+  -
+    name: BASE
+    jointType: free
+    elements:
+      type: Transform
+      elements:
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.20, 0.03 ] }
+          translation: [ 0, 0, 0.20 ]
+          appearance: { material: { diffuseColor: [ 0.4, 0.4, 0.4 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.10 ] }
+          translation: [ 0, 0.085, 0.15 ]
+          appearance: { material: { diffuseColor: [ 0.4, 0.4, 0.4 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.10 ] }
+          translation: [ 0, -0.085, 0.15 ]
+          appearance: { material: { diffuseColor: [ 0.4, 0.4, 0.4 ] } }	  
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.10, 0.20, 0.10 ] }
+          translation: [ 0, 0, 0.05 ]
+          appearance: { material: { diffuseColor: [ 0.4, 0.4, 0.4 ] } }	  
+        -
+          type: RigidBody
+          centerOfMass: [ 0, 0, 0.12 ]
+          mass: 2.0
+          inertia: [
+            0.2,  0, 0,
+            0,  0.2, 0,
+            0,    0, 0.2 ]

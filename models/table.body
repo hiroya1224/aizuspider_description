@@ -1,0 +1,37 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: table
+
+links:
+  -
+    name: BASE
+    jointType: fixed
+    elements:
+      type: Transform
+      elements:
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.7, 1.5, 0.1 ] }
+          translation: [ 0, 0, -0.05 ]
+          appearance: { material: { diffuseColor: [ 0.6, 0.6, 0.2 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.7 ] }
+          translation: [ 0.3, 0.7, -0.4 ]
+          appearance: { material: { diffuseColor: [ 0.6, 0.6, 0.2 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.7 ] }
+          translation: [ 0.3, -0.7, -0.4 ]
+          appearance: { material: { diffuseColor: [ 0.6, 0.6, 0.2 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.7 ] }
+          translation: [ -0.3, 0.7, -0.4 ]
+          appearance: { material: { diffuseColor: [ 0.6, 0.6, 0.2 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.03, 0.03, 0.7 ] }
+          translation: [ -0.3, -0.7, -0.4 ]
+          appearance: { material: { diffuseColor: [ 0.6, 0.6, 0.2 ] } }

@@ -1,0 +1,37 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: TrashBox
+
+links:
+  -
+    name: BASE
+    jointType: fixed
+    elements:
+      type: Transform
+      elements:
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.4, 0.6, 0.02 ] }
+          translation: [ 0, 0, 0.01 ]
+          appearance: &APP { material: { diffuseColor: [ 0.7, 0.0, 0.7 ] } }
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.42, 0.02, 0.45 ] }
+          translation: [ 0, 0.3, 0.23 ]
+          appearance: *APP
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.42, 0.02, 0.45 ] }
+          translation: [ 0, -0.3, 0.23 ]
+          appearance: *APP
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.02, 0.62, 0.45 ] }
+          translation: [ 0.2, 0, 0.23 ]
+          appearance: *APP
+        -
+          type: Shape
+          geometry: { type: Box, size: [ 0.02, 0.62, 0.45 ] }
+          translation: [ -0.2, 0, 0.23 ]
+          appearance: *APP

@@ -1,0 +1,501 @@
+items: 
+  id: 0
+  name: "Root"
+  plugin: Base
+  class: RootItem
+  children: 
+    - 
+      id: 1
+      name: "ViewProject"
+      plugin: Base
+      class: SubProjectItem
+      data: 
+        filename: "${SHARE}/WRS2018/project/SingleSceneView.cnoid"
+        format: PROJECT
+        saveMode: "Manual save"
+    - 
+      id: 2
+      name: "World"
+      plugin: Body
+      class: WorldItem
+      data: 
+        collisionDetection: false
+        collisionDetector: AISTCollisionDetector
+        materialTableFile: "${SHARE}/default/materials.yaml"
+      children: 
+        - 
+          id: 3
+          name: "T1M"
+          plugin: Base
+          class: SubProjectItem
+          data: 
+            filename: "${PROJECT_DIR}/Task2-Agent-System2019.cnoid"
+            format: PROJECT
+            saveMode: "Manual save"
+        - 
+          id: 4
+          name: "AISTSimulator-Torque"
+          plugin: Body
+          class: AISTSimulatorItem
+          data: 
+            timeStep: 0.001
+            realtimeSync: true
+            recording: "full"
+            timeRangeMode: "Unlimited"
+            timeLength: 60
+            allLinkPositionOutputMode: true
+            deviceStateOutput: true
+            controllerThreads: true
+            recordCollisionData: false
+            controllerOptions: "torque"
+            dynamicsMode: "Forward dynamics"
+            integrationMode: "Runge Kutta"
+            gravity: [ 0, 0, -9.80665 ]
+            staticFriction: 0.5
+            dynamicFriction: 0.5
+            cullingThresh: 0.01
+            contactCullingDepth: 0.05
+            errorCriterion: 0.001
+            maxNumIterations: 1000
+            contactCorrectionDepth: 0.0001
+            contactCorrectionVelocityRatio: 30
+            kinematicWalking: false
+            2Dmode: false
+            oldAccelSensorMode: false
+          children: 
+            - 
+              id: 5
+              name: "GLVisionSimulator"
+              plugin: Body
+              class: GLVisionSimulatorItem
+              data:
+                targetBodies: [ AizuSpiderAA, AizuSpiderBB ]
+                targetSensors: [ ARM_CAMERA, FRONT_CAMERA ]
+                enabled: true
+                maxFrameRate: 1000
+                maxLatency: 1
+                recordVisionData: false
+                threadMode: Sensor
+                bestEffort: true
+                allSceneObjects: false
+                rangeSensorPrecisionRatio: 2
+                depthError: 0
+                enableHeadLight: true
+                enableAdditionalLights: true
+                antiAliasing: false
+        - 
+          id: 8
+          name: "AizuSpiderAA"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${SHARE}/model/AizuSpider/AizuSpiderSS.body"
+            currentBaseLink: "CHASSIS"
+            rootPosition: [ 5, 0, 0.035 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointPositions: [ 
+               0.000000,  0.000000,  0.000000,  0.000000, -1.570796,  0.872665,  0.872665,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000 ]
+            initialRootPosition: [ 5, 0, 0.035 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            initialJointPositions: [ 
+               0.000000,  0.000000,  0.000000,  0.000000, -1.570796,  0.872665,  0.872665,  0.000000,  0.000000,  0.000000, 
+               0.000000,  0.000000,  0.000000 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: true
+            isEditable: true
+          children: 
+            - 
+              id: 12
+              name: "BodyTrackingCamera"
+              plugin: Body
+              class: BodyTrackingCameraItem
+              data: 
+                targetLink: ""
+                keepRelativeAttitude: false
+                cameraType: "Perspective"
+                nearClipDistance: 0.05
+                farClipDistance: 200
+                fieldOfView: 0.785398
+            - 
+              id: 13
+              name: "BodyPublisher"
+              plugin: ROS
+              class: BodyPublisherItem
+              data: 
+                maxPublishRate: 30
+##         - 
+##           id: 14
+##           name: "AizuSpiderBB"
+##           plugin: Body
+##           class: BodyItem
+##           data: 
+##             modelFile: "${SHARE}/model/AizuSpider/AizuSpiderSS.body"
+##             currentBaseLink: "CHASSIS"
+##             rootPosition: [ 5, 1, 0.035 ]
+##             rootAttitude: [ 
+##               1, 0, 0, 
+##               0, 1, 0, 
+##               0, 0, 1 ]
+##             jointPositions: [ 
+##                0.000000,  0.000000,  0.000000,  0.000000, -1.570796,  0.872665,  0.872665,  0.000000,  0.000000,  0.000000, 
+##                0.000000,  0.000000,  0.000000 ]
+##             initialRootPosition: [ 5, 1, 0.035 ]
+##             initialRootAttitude: [ 
+##               1, 0, 0, 
+##               0, 1, 0, 
+##               0, 0, 1 ]
+##             initialJointPositions: [ 
+##                0.000000,  0.000000,  0.000000,  0.000000, -1.570796,  0.872665,  0.872665,  0.000000,  0.000000,  0.000000, 
+##                0.000000,  0.000000,  0.000000 ]
+##             zmp: [ 0, 0, 0 ]
+##             collisionDetection: true
+##             selfCollisionDetection: true
+##             isEditable: true
+##           children: 
+##             - 
+##               id: 15
+##               name: "AizuSpiderController"
+##               plugin: Body
+##               class: SimpleControllerItem
+##               data: 
+##                 isNoDelayMode: false
+##                 controllerOptions: ""
+##                 controller: "AizuSpiderController"
+##                 baseDirectory: "Controller directory"
+##                 reloading: true
+##                 isOldTargetVariableMode: false
+##               children: 
+##                 - 
+##                   id: 16
+##                   name: "Jaco2Controller"
+##                   plugin: Body
+##                   class: SimpleControllerItem
+##                   data: 
+##                     isNoDelayMode: false
+##                     controllerOptions: ""
+##                     controller: "Jaco2Controller"
+##                     baseDirectory: "Controller directory"
+##                     reloading: true
+##                     isOldTargetVariableMode: false
+##                 - 
+##                   id: 17
+##                   name: "AizuSpider-JoystickInput"
+##                   plugin: Body
+##                   class: SimpleControllerItem
+##                   data: 
+##                     isNoDelayMode: false
+##                     controllerOptions: ""
+##                     controller: "JoyTopicSubscriberController"
+##                     baseDirectory: "Controller directory"
+##                     reloading: false
+##                     isOldTargetVariableMode: false
+##             - 
+##               id: 18
+##               name: "BodyTrackingCamera"
+##               plugin: Body
+##               class: BodyTrackingCameraItem
+##               data: 
+##                 targetLink: ""
+##                 keepRelativeAttitude: false
+##                 cameraType: "Perspective"
+##                 nearClipDistance: 0.05
+##                 farClipDistance: 200
+##                 fieldOfView: 0.785398
+##             - 
+##               id: 19
+##               name: "BodyPublisher"
+##               plugin: ROS
+##               class: BodyPublisherItem
+##               data: 
+##                 maxPublishRate: 30                
+views: 
+  - 
+    id: 0
+    plugin: Base
+    class: ItemPropertyView
+    mounted: true
+  - 
+    id: 1
+    plugin: Base
+    class: ItemTreeView
+    mounted: true
+    state:
+      selected: [ 4 ]
+      checked: [ 8, 14, 16, 18 ]
+      expanded: [ 2, 4, 6, 15 ]
+  - 
+    id: 2
+    plugin: Base
+    class: MessageView
+    mounted: true
+  - 
+    id: 3
+    plugin: Base
+    class: SceneView
+    mounted: true
+    state: 
+      editMode: false
+      viewpointControlMode: thirdPerson
+      collisionLines: false
+      polygonMode: fill
+      cullingMode: enabled
+      defaultHeadLight: true
+      defaultHeadLightIntensity: 0.8
+      headLightLightingFromBack: false
+      worldLight: true
+      worldLightIntensity: 0.7
+      worldLightAmbient: 0.3
+      additionalLights: true
+      fog: true
+      floorGrid: false
+      floorGridSpan: 10
+      floorGridInterval: 0.5
+      xzGridSpan: 10
+      xzGridInterval: 0.5
+      xzGrid: false
+      yzGridSpan: 10
+      yzGridInterval: 0.5
+      texture: true
+      lineWidth: 1
+      pointSize: 1
+      normalVisualization: false
+      normalLength: 0.01
+      coordinateAxes: true
+      fpsTestIteration: 1
+      showFPS: false
+      enableNewDisplayListDoubleRendering: false
+      useBufferForPicking: true
+      upsideDown: false
+      cameras: 
+        - 
+          camera: [ System, Perspective ]
+          fieldOfView: 0.698132
+          near: 0.05
+          far: 200
+          eye: [ 4, 2, 1.5 ]
+          direction: [ -0.888888889, -0.444444444, -0.111111111 ]
+          up: [ -0.0993807989, -0.0496903995, 0.99380799 ]
+        - 
+          camera: [ System, Orthographic ]
+          orthoHeight: 20
+          near: 0.05
+          far: 200
+        - 
+          camera: BodyTrackingCamera
+          isCurrent: true
+          eye: [ -0.543500475, -0.414703735, 0.842134452 ]
+          direction: [ 0.962129087, 0.147434452, -0.229283016 ]
+          up: [ 0.226637528, 0.0347294144, 0.973359799 ]
+      backgroundColor: [ 0, 0, 0 ]
+      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      dedicatedItemTreeViewChecks: false
+  - 
+    id: 4
+    name: "Camera Scene"
+    plugin: Base
+    class: SceneView
+    state: 
+      editMode: false
+      viewpointControlMode: thirdPerson
+      collisionLines: false
+      polygonMode: fill
+      cullingMode: enabled
+      defaultHeadLight: true
+      defaultHeadLightIntensity: 0.75
+      headLightLightingFromBack: false
+      worldLight: true
+      worldLightIntensity: 0.5
+      worldLightAmbient: 0.3
+      additionalLights: true
+      fog: true
+      floorGrid: true
+      floorGridSpan: 10
+      floorGridInterval: 0.5
+      xzGridSpan: 10
+      xzGridInterval: 0.5
+      xzGrid: false
+      yzGridSpan: 10
+      yzGridInterval: 0.5
+      texture: true
+      lineWidth: 1
+      pointSize: 1
+      normalVisualization: false
+      normalLength: 0.01
+      coordinateAxes: true
+      fpsTestIteration: 1
+      showFPS: false
+      enableNewDisplayListDoubleRendering: false
+      useBufferForPicking: true
+      upsideDown: false
+      cameras: 
+        - 
+          camera: [ System, Perspective ]
+          fieldOfView: 0.698132
+          near: 0.04
+          far: 200
+          eye: [ 4, 2, 1.5 ]
+          direction: [ -0.888888889, -0.444444444, -0.111111111 ]
+          up: [ -0.099380799, -0.0496903995, 0.99380799 ]
+        - 
+          camera: [ System, Orthographic ]
+          orthoHeight: 20
+          near: 0.04
+          far: 200
+        - 
+          camera: [ AizuSpider, FRONT_CAMERA ]
+          isCurrent: true
+        - 
+          camera: BodyTrackingCamera
+          eye: [ -0.543500475, -0.414703735, 0.842134452 ]
+          direction: [ 0.962129087, 0.147434452, -0.229283016 ]
+          up: [ 0.226637528, 0.0347294144, 0.973359799 ]
+      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
+      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
+      dedicatedItemTreeViewChecks: true
+      checked: [ 8, 12 ]
+  - 
+    id: 5
+    plugin: Body
+    class: BodyLinkView
+    mounted: true
+    state: 
+      showRotationMatrix: false
+  - 
+    id: 6
+    plugin: Body
+    class: JointSliderView
+    mounted: true
+    state: 
+      showAllJoints: true
+      jointId: false
+      name: true
+      numColumns: 1
+      spinBox: true
+      slider: true
+      dial: false
+      labelOnLeft: true
+  - 
+    id: 7
+    plugin: Body
+    class: LinkSelectionView
+    mounted: true
+    state: 
+      listingMode: "Link List"
+  - 
+    id: 8
+    plugin: OpenRTM
+    class: RTSNameServerView
+    state: 
+      NameServers: 
+        - 
+          isDefaultNameServer: true
+          host: "localhost"
+          port: 2809
+  - 
+    id: 9
+    plugin: Python
+    class: PythonConsoleView
+    mounted: true
+toolbars: 
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 1000
+    playbackFrameRate: 60
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
+  "BodyMotionGenerationBar": 
+    autoGenerationForNewBody: true
+    balancer: false
+    autoGeneration: false
+    timeScaleRatio: 1
+    preInitialDuration: 1
+    postFinalDuration: 1
+    onlyTimeBarRange: false
+    makeNewBodyItem: true
+    stealthyStepMode: true
+    stealthyHeightRatioThresh: 2
+    flatLiftingHeight: 0.005
+    flatLandingHeight: 0.005
+    impactReductionHeight: 0.005
+    impactReductionTime: 0.04
+    autoZmp: true
+    minZmpTransitionTime: 0.1
+    zmpCenteringTimeThresh: 0.03
+    zmpTimeMarginBeforeLiftingSpin: 0
+    zmpMaxDistanceFromCenter: 0.02
+    allLinkPositions: false
+    lipSyncMix: false
+    timeToStartBalancer: 0
+    balancerIterations: 2
+    plainBalancerMode: false
+    boundaryConditionType: position
+    boundarySmootherType: quintic
+    boundarySmootherTime: 0.5
+    boundaryCmAdjustment: false
+    boundaryCmAdjustmentTime: 1
+    waistHeightRelaxation: false
+    gravity: 9.8
+    dynamicsTimeRatio: 1
+Body: 
+  "BodyMotionEngine": 
+    updateJointVelocities: false
+  "EditableSceneBody": 
+    editableSceneBodies: 
+      - 
+        bodyItem: 8
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+    staticModelEditing: true
+  "KinematicFaultChecker": 
+    checkJointPositions: true
+    angleMargin: 0
+    translationMargin: 0
+    checkJointVelocities: true
+    velocityLimitRatio: 100
+    targetJoints: all
+    checkSelfCollisions: true
+    onlyTimeBarRange: false
+  "SplineFilterDialog": 
+    isInputFrameRateSpecified: false
+    inputFrameRate: 200
+    isOutputFrameRateSpecified: false
+    outputFrameRate: 200
+OpenRTM: 
+  "deleteUnmanagedRTCsOnStartingSimulation": false
+layoutOfToolBars: 
+  rows: 
+    - 
+      - { name: "FileBar", x: 0, priority: 0 }
+      - { name: "CaptureBar", x: 47, priority: 2 }
+      - { name: "ScriptBar", x: 47, priority: 0 }
+      - { name: "SimulationBar", x: 93, priority: 1 }
+      - { name: "TimeBar", x: 94, priority: 0 }
+      - { name: "SceneBar", x: 5000, priority: 4 }
+      - { name: "KinematicsBar", x: 5000, priority: 3 }

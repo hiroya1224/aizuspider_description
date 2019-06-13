@@ -1,0 +1,35 @@
+<launch>
+  <param name="/use_sim_time" value="true" />
+
+  <group ns="AizuSpiderAA">
+    <param name="robot_description"
+           textfile="$(find aizuspider_description)/AizuSpiderSS.urdf" />
+    <rosparam command="load"
+              file="$(find aizuspider_description)/aizuspider_controller_settings.yaml" />
+    <node name="$(anon cm_spawner)" pkg="controller_manager"
+          type="spawner" args="joint_state_controller
+                               fullbody_controller" />
+    <node name="robot_state_publisher_AA" pkg="robot_state_publisher"
+          type="state_publisher">
+      <param name="tf_prefix" value="AizuSpiderAA" />
+    </node>
+  </group>
+  <ggroup ns="AizuSpiderBB">
+    <param name="robot_description"
+           textfile="$(find aizuspider_description)/AizuSpiderSS.urdf" />
+    <rosparam command="load"
+              file="$(find aizuspider_description)/aizuspider_controller_settings.yaml" />
+    <node name="$(anon cm_spawner)" pkg="controller_manager"
+          type="spawner" args="joint_state_controller
+                               fullbody_controller" />
+    <node name="robot_state_publisher_BB" pkg="robot_state_publisher"
+          type="state_publisher">
+      <param name="tf_prefix" value="AizuSpiderBB" />
+    </node>
+  </ggroup>
+
+  <nnode name="choreonoid" pkg="aizuspider_description" type="run_cnoid.sh"
+        args="/userdir/InvPendulumAizu.cnoid" />
+  <node name="choreonoid" pkg="aizuspider_description" type="run_cnoid.sh"
+        args="$(find aizuspider_description)/Task2-AizuSpiderSS.cnoid" />
+</launch>
