@@ -1,0 +1,21 @@
+<launch>
+  <arg name="image"  default="/AizuSpiderAA/ARM_CAMERA/" />
+  <arg name="points" default="/AizuSpiderAA/ARM_CAMERA/points" />
+  <machine name="localhost" address="localhost" />
+  <arg name="cloud_machine" default="localhost" />
+  <arg name="display_machine" default="localhost" />
+  <arg name="USE_VIEW" default="true" />
+
+  <!-- launch/pointcloud_screenpoint.launch -->
+  <include file="$(find jsk_pcl_ros)/launch/pointcloud_screenpoint.launch">
+    <arg name="cloud_machine"   default="$(arg cloud_machine)"/>
+    <arg name="display_machine" default="$(arg display_machine)"/>
+    <arg name="image"  default="$(arg image)"/>
+    <arg name="image_type"  default="image"/>
+    <arg name="points" default="$(arg points)"/>
+    <arg name="USE_DEPTH_CREATER"    default="false" />
+    <arg name="USE_REGISTERED_DEPTH" default="false"/>
+    <arg name="USE_VIEW"             default="$(arg USE_VIEW)"/>
+  </include>
+
+</launch>
