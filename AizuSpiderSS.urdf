@@ -687,4 +687,17 @@
     <origin xyz="-0.003 0 0.044" rpy="0 0 0" />
   </joint>
 
+  <link name="ARM_CAMERA" />
+  <joint name="ARM_CAMERA_tf" type="fixed">
+    <parent link="HAND"/>
+    <child  link="ARM_CAMERA"/>
+    <origin xyz="0.0 0.0 0.1055" rpy="0 0 3.14159265358979" />
+  </joint>
+  <link name="FRONT_CAMERA" />
+  <joint name="FRONT_CAMERA_tf" type="fixed">
+    <parent link="CHASSIS"/>
+    <child  link="FRONT_CAMERA"/>
+    <origin xyz="0.25470 0 0.13550" rpy="0 1.57079632679490 0" />
+    <!-- [ 0, 0, 1, -90 ], [ 1, 0, 0, 90 ] -->
+  </joint>
 </robot>
