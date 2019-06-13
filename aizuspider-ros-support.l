@@ -17,6 +17,7 @@
         (wait (send req :wait))
         (res (send req :response))
         )
+    (ros::ros-warn (format nil "[grasp] pos: ~A, tm: ~A, wait: ~A" pos tm wait))
     (send *robot* :angle-vector
           (send *ri* :state :reference-vector))
     (send *robot* :rarm :hand-f1 :joint-angle (rad2deg (elt pos 0)))
@@ -39,7 +40,7 @@
         ret
         )
     (send tgt :transform cds)
-
+    (ros::ros-warn (format nil "[solve-ik] tgt: ~A, move: ~A, wait: ~A, position_ik: ~A" tgt move wait position-ik))
     (send *robot* :angle-vector
           (send *ri* :state :reference-vector))
     (if position-ik
@@ -49,7 +50,8 @@
     (when ret
       (send res :success t)
       (send res :angles
-            (send *robot* :angle-vector))
+            (map float-vector #'(lambda (ang) (deg2rad ang))
+		 (send *robot* :angle-vector)))
       (when (> move 0)
         (send *ri* :angle-vector
               (send *robot* :angle-vector) move)
@@ -69,3 +71,7 @@
 (while (ros::ok)
   (ros::spin-once)
   )
+
+#|
+10.2 -1.4
+|#
