@@ -68,7 +68,9 @@ items:
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
-              data: 
+              data:
+                targetBodies: [ AizuSpiderAA, AizuSpiderBB ]
+                targetSensors: [ ARM_CAMERA, FRONT_CAMERA ]
                 enabled: true
                 maxFrameRate: 1000
                 maxLatency: 1
