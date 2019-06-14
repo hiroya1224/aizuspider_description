@@ -1,6 +1,13 @@
 <launch>
   <arg name="image"  default="/AizuSpiderAA/ARM_CAMERA/" />
   <arg name="points" default="/AizuSpiderAA/ARM_CAMERA/points" />
+  <arg name="image_type" default="image" />
+  <!-- JAXON -->
+  <!--
+  <arg name="image"  default="/multisense_local/left/" />
+  <arg name="points" default="/multisense_local/organized_image_points2" />
+  <arg name="image_type" default="image_rect_color" />
+  -->
   <machine name="localhost" address="localhost" />
   <arg name="cloud_machine" default="localhost" />
   <arg name="display_machine" default="localhost" />
@@ -10,8 +17,8 @@
   <include file="$(find jsk_pcl_ros)/launch/pointcloud_screenpoint.launch">
     <arg name="cloud_machine"   default="$(arg cloud_machine)"/>
     <arg name="display_machine" default="$(arg display_machine)"/>
-    <arg name="image"  default="$(arg image)"/>
-    <arg name="image_type"  default="image"/>
+    <arg name="image"       default="$(arg image)"/>
+    <arg name="image_type"  default="$(arg image_type)"/>
     <arg name="points" default="$(arg points)"/>
     <arg name="USE_DEPTH_CREATER"    default="false" />
     <arg name="USE_REGISTERED_DEPTH" default="false"/>
