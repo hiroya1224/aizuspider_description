@@ -1,5 +1,7 @@
 (require :jaxon_jvrc-interface "package://hrpsys_choreonoid_tutorials/euslisp/jaxon_jvrc-interface.l")
 
+(require :clicked-pick-util "package://aizuspider_description/clicked-pick-utils.l")
+
 (defun initialize-clicked-pick ()
   (jaxon_jvrc-init)
   (setq *robot* (jaxon_jvrc))

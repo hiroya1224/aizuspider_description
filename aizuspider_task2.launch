@@ -35,8 +35,6 @@
     </node>
   </ggroup>
 
-  <nnode name="choreonoid" pkg="aizuspider_description" type="run_cnoid.sh"
-        args="/userdir/InvPendulumAizu.cnoid" />
   <node name="choreonoid" pkg="aizuspider_description" type="run_cnoid.sh"
         args="$(find aizuspider_description)/Task2-AizuSpiderSS.cnoid" />
 </launch>

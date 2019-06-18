@@ -1,0 +1,47 @@
+### sample yaml
+task:
+  type: 'sub_project'
+  name: 'Task1'
+  file: '$(find aizuspider_description)/Task2-Agent-System2019.cnoid'
+JAXON_RED:
+  name: 'JAXON_RED'
+  type: 'robot'
+  file: '$(find jvrc_models)/JAXON_JVRC/JAXON_JVRCmain_hrpsys_bush.wrl'
+  translation: [5, 0, 1.0]
+  rotation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+  joint_angles: [
+    0.000054, -0.003093, -0.262419,  0.681091, -0.418672,  0.003093,  0.000054, -0.003093, -0.262401,  0.681084,
+    -0.418684,  0.003093,  0.000000,  0.000000,  0.000000,  0.000000,  0.450000,  0.000000,  0.523599, -0.349066,
+    -0.087266, -1.396263,  0.000000,  0.000000, -0.349066,  0.000000,  0.523599,  0.349066,  0.087266, -1.396263,
+    0.000000,  0.000000, -0.349066,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
+  body_rtc:
+    name: 'JAXON_RED(Robot)0'
+    module: '$(find hrpsys_choreonoid)/PDcontroller.so'
+    config: '$(find hrpsys_choreonoid_tutorials)/config/SensorReaderRTC_JAXON_RED.PD.conf'
+    rate: 500
+  vision:
+    body: 'JAXON_RED'
+    namelist: 'HEAD_LEFT_CAMERA, HEAD_RIGHT_CAMERA, HEAD_RANGE'
+sci1:
+  type: 'script'
+  file: '$(find hrpsys_choreonoid)/scripts/ros_service_server.py'
+start_simulation: True
+#robot:
+#  name: ''
+#  type: 'robot'
+#  file: ''
+#  translation: []
+#  rotation: [[], [], []]
+#  joint_angles: []
+#  body_rtc:
+#    name:
+#    module:
+#    config:
+#    rate:
+#  vision:
+#    body:
+#    namelist:
+#sci:
+#  name: ''
+#  type: 'script'
+#  file: ''

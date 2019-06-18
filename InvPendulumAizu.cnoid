@@ -13,16 +13,25 @@ items:
         collisionDetection: false
         collisionDetector: AISTCollisionDetector
         materialTableFile: "${SHARE}/default/materials.yaml"
-      children: 
-        - 
+      children:
+        -
           id: 2
+          name: "T1M"
+          plugin: Base
+          class: SubProjectItem
+          data:
+            filename: "${PROJECT_DIR}/Task2-Agent-System2019.cnoid"
+            format: PROJECT
+            saveMode: "Manual save"
+        -
+          id: 3
           name: "AizuSpiderAA"
           plugin: Body
           class: BodyItem
           data: 
             modelFile: "${PROJECT_DIR}/InvPendulumAizu.body"
             currentBaseLink: "BODY"
-            rootPosition: [ 0, 0, 0.1 ]
+            rootPosition: [ 8, -1.4, 0.05 ]
             rootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
@@ -31,7 +40,7 @@ items:
              0.000000,  0.000000,  0.000000,  0.000000,
              -1.570796,  0.872665,  0.872665,  0.000000,  0.000000,  0.000000,
              0.000000,  0.000000,  0.000000  ]
-            initialRootPosition: [ 0, 0, 0.1 ]
+            initialRootPosition: [ 8, -1.4, 0.05 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
@@ -46,7 +55,7 @@ items:
             isEditable: true
           children: 
             - 
-              id: 3
+              id: 4
               name: "SimpleController"
               plugin: Body
               class: SimpleControllerItem
@@ -58,37 +67,14 @@ items:
                 reloading: false
                 isOldTargetVariableMode: false
             - 
-              id: 6
+              id: 5
               name: "BodyPublisher"
               plugin: ROS
               class: BodyPublisherItem
               data: 
                 maxPublishRate: 30		
         - 
-          id: 4
-          name: "Floor"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "${SHARE}/model/misc/floor.body"
-            currentBaseLink: "Floor"
-            rootPosition: [ 0, 0, -0.1 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointPositions: [  ]
-            initialRootPosition: [ 0, 0, -0.1 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: false
-        - 
-          id: 5
+          id: 6
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -117,6 +103,27 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
+          children:
+            -
+              id: 7
+              name: "GLVisionSimulator"
+              plugin: Body
+              class: GLVisionSimulatorItem
+              data:
+                targetBodies: [ AizuSpiderAA, AizuSpiderBB ]
+                targetSensors: [ ARM_CAMERA, FRONT_CAMERA ]
+                enabled: true
+                maxFrameRate: 1000
+                maxLatency: 1
+                recordVisionData: false
+                threadMode: Sensor
+                bestEffort: true
+                allSceneObjects: false
+                rangeSensorPrecisionRatio: 2
+                depthError: 0
+                enableHeadLight: true
+                enableAdditionalLights: true
+                antiAliasing: false
 views: 
   - 
     id: 0
@@ -129,8 +136,8 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 3 ]
-      checked: [ 2, 4 ]
+      selected: [ 1,2,3,4,5,6 ]
+      checked: [ 1,2,3,4,5,6 ]
       expanded: [ 1, 2 ]
   - 
     id: 2
