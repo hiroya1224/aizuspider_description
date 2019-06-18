@@ -111,7 +111,44 @@ items:
             collisionDetection: true
             selfCollisionDetection: true
             isEditable: true
-          children: 
+          children:
+            - 
+              id: 15
+              name: "AizuSpiderController"
+              plugin: Body
+              class: SimpleControllerItem
+              data: 
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "AizuSpiderController"
+                baseDirectory: "Controller directory"
+                reloading: true
+                isOldTargetVariableMode: false
+              children: 
+                - 
+                  id: 16
+                  name: "Jaco2Controller"
+                  plugin: Body
+                  class: SimpleControllerItem
+                  data: 
+                    isNoDelayMode: false
+                    controllerOptions: ""
+                    controller: "Jaco2Controller"
+                    baseDirectory: "Controller directory"
+                    reloading: true
+                    isOldTargetVariableMode: false
+                - 
+                  id: 17
+                  name: "AizuSpider-JoystickInput"
+                  plugin: Body
+                  class: SimpleControllerItem
+                  data: 
+                    isNoDelayMode: false
+                    controllerOptions: ""
+                    controller: "JoyTopicSubscriberController"
+                    baseDirectory: "Controller directory"
+                    reloading: false
+                    isOldTargetVariableMode: false	  
             - 
               id: 12
               name: "BodyTrackingCamera"
