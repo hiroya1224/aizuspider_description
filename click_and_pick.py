@@ -49,9 +49,11 @@ def solve_ik(cds):
         res = solve_ik_srv(pose=cds, position_ik=False, move=2000, wait=True)
         print res
         dir(res)
+        return res.success
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
         rospy.signal_shutdown('service error')
+    return False
 
 def callback(ptmsg):
     rospy.loginfo("callback %s", ptmsg)
@@ -60,6 +62,7 @@ def callback(ptmsg):
     try:
         (trans,rot) = listener.lookupTransform('/%s/CHASSIS'%(name), ptmsg.header.frame_id, ptmsg.header.stamp)
     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+        print "Tf error"%e
         rospy.signal_shutdown('tf error')
 
     print trans
@@ -77,7 +80,12 @@ def callback(ptmsg):
     cds.orientation.y = 0
     cds.orientation.z = 0
 
-    solve_ik(cds)
+    if solve_ik(cds):
+        do_grasp()
+    else:
+        print "IK failed"
+
+    ### pick up ...
 
     rospy.signal_shutdown('finished')
 

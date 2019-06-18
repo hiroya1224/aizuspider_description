@@ -59,7 +59,7 @@ class MovePub:
 
         cmd = Twist()
         if trans != 0.0:
-            cmd.linear.x  = 3.0 * trans / math.fabs(trans)
+            cmd.linear.x  = 4.0 * trans / math.fabs(trans)
         if rot != 0.0:
             cmd.angular.z = 1.5 * rot / math.fabs(rot)
         self.cmd_pub_.publish(cmd)
