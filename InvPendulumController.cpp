@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+#include <boost/thread.hpp>
 #define DEBUG 0
 
 using namespace cnoid;
@@ -118,6 +119,9 @@ class InvPendulumController : public SimpleController
   //
   double vx_ref;
   double wz_ref;
+
+  boost::mutex mtx_;
+
 public:
   void callback (const geometry_msgs::Twist::ConstPtr &msg)
   {
@@ -274,6 +278,9 @@ public:
     std::cout << "initialized[InvPendulumController]" << std::endl;
 
     counter = 0;
+
+    mtx_.lock();
+
     return true;
   }
   void control_bush()
@@ -303,6 +310,10 @@ public:
   virtual bool control() override
   {
     control_bush();
+
+    std::cerr << "control pre  lock" << std::endl;
+    mtx_.lock();
+    std::cerr << "control post lock" << std::endl;
 
     //// wait until accel sensor returns valid value
     if (counter++ < 2) {
@@ -376,6 +387,16 @@ public:
     wheel_r->u() = u_r;
 
     return true;
+  }
+
+  virtual bool start() override
+  {
+    std::cerr << ";; start ;;" << std::endl;
+  }
+  virtual bool stop()  override
+  {
+    std::cerr << ";; stop ;;" << std::endl;
+    mtx_.unlock();
   }
 };
 
