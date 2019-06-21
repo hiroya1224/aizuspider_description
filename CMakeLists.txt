@@ -8,7 +8,7 @@ find_package(catkin REQUIRED COMPONENTS message_generation geometry_msgs std_msg
 
 # compile_openhrp_model(${PROJECT_SOURCE_DIR}/models/aero_upper.wrl)
 add_service_files(
-  FILES Grasp.srv SolveIK.srv
+  FILES Grasp.srv SolveIK.srv Control.srv
 )
 generate_messages(
   DEPENDENCIES geometry_msgs std_msgs
@@ -18,4 +18,3 @@ catkin_package(
   DEPENDS roseus
   CATKIN_DEPENDS roseus geometry_msgs std_msgs message_runtime
   )
-
