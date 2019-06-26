@@ -31,8 +31,8 @@ solve_ik_srv = rospy.ServiceProxy('%s/solve_ik'%(name), SolveIK)
 def do_grasp():
     try:
         res = grasp_srv(position=[math.pi/3, math.pi/3, math.pi/3], time=1000, wait=False)
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
+    except rospy.ServiceException as e:
+        print "Service call failed: %s"%(e)
         rospy.signal_shutdown('service error')
 
 def solve_ik(cds):
@@ -50,8 +50,8 @@ def solve_ik(cds):
         print res
         dir(res)
         return res.success
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
+    except rospy.ServiceException as e:
+        print "Service call failed: %s"%(e)
         rospy.signal_shutdown('service error')
     return False
 
@@ -59,17 +59,20 @@ def callback(ptmsg):
     rospy.loginfo("callback %s", ptmsg)
     #ptmsg.header.frame_id
     #ptmsg.header.stamp
+    listener.waitForTransform('/%s/CHASSIS'%(name), ptmsg.header.frame_id, ptmsg.header.stamp, rospy.Duration(5.0))
     try:
         (trans,rot) = listener.lookupTransform('/%s/CHASSIS'%(name), ptmsg.header.frame_id, ptmsg.header.stamp)
-    except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-        print "Tf error"%e
+    except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException) as e:
+        print "Tf error %s"%(e)
         rospy.signal_shutdown('tf error')
 
-    print trans
-    print rot
-    q = Quaternion(rot)
+    print 'tr:', trans
+    print 'rt:', rot
+    q = Quaternion([ rot[3], rot[0], rot[1], rot[2] ])
+    print 'org:', [ ptmsg.point.x, ptmsg.point.y, ptmsg.point.z ]
     ptrans = q.rotate([ ptmsg.point.x, ptmsg.point.y, ptmsg.point.z ])
-    print ptrans
+    print 'tgt:', ptrans
+
     cds = Pose()
     cds.position.x = trans[0] + ptrans[0]
     cds.position.y = trans[1] + ptrans[1]

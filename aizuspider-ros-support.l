@@ -44,8 +44,8 @@
     (send *robot* :angle-vector
           (send *ri* :state :reference-vector))
     (if position-ik
-        (setq ret (send *robot* :rarm :inverse-kinematics cds :rotation-axis nil))
-      (setq ret (send *robot* :rarm :inverse-kinematics cds))
+        (setq ret (send *robot* :rarm :inverse-kinematics tgt :rotation-axis nil))
+      (setq ret (send *robot* :rarm :inverse-kinematics tgt))
       )
     (when ret
       (send res :success t)
