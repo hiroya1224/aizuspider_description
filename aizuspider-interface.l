@@ -122,3 +122,42 @@
   (if (not (boundp '*robot*))
       (setq *robot* (AizuSpiderSS)))
   )
+
+;;;;; okiagari functions (thanks to Iori Yanokura[https://github.com/iory] )
+(defun okiagari-right ()
+  ;; reset pose
+  (send *robot* :reset-pose)
+  (send *ri* :angle-vector (send *robot* :angle-vector) 1000)
+  (send *ri* :wait-interpolation)
+  ;;
+  (send *robot* :rarm :move-end-pos #f(0 -500 -300))
+  (send *ri* :angle-vector
+        (send *robota* :angle-vector) 100);;??
+  (send *ri* :wait-interpolation)
+  ;;
+  (send *robot* :reset-pose)
+  (send *ri* :angle-vector (send *robot* :angle-vector) 1000)
+  (send *ri* :wait-interpolation)
+  )
+(defun okiagari-left ()
+  ;; reset pose
+  (send *robot* :reset-pose)
+  (send *ri* :angle-vector (send *robot* :angle-vector) 1000)
+  (send *ri* :wait-interpolation)
+  ;;
+  (send *robot* :rarm :move-end-pos #f(0 -500 -300))
+  (send *ri* :angle-vector
+        (send *robota* :angle-vector) 100);;??
+  (send *ri* :wait-interpolation)
+  ;;
+  (send *robota* :rarm :move-end-pos #f(0 0 -200))
+  (send *robota* :forearm :joint-angle 90)
+  (send *ri* :angle-vector
+        (send *robota* :angle-vector) 100);;??
+  (send *ri* :wait-interpolation)
+  ;;
+  (send *robot* :reset-pose)
+  (send *ri* :angle-vector (send *robot* :angle-vector) 1000)
+  (send *ri* :wait-interpolation)
+  )
+;;;;;
