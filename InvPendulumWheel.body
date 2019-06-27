@@ -91,7 +91,7 @@ links:
     jointAxis: [ 0, 1, 0 ]
     jointRange: [ -180, 180 ]
     jointVelocityRange: [ -42.0, 42.0 ]
-    rotorInertia: 0.6
+    rotorInertia: 0.5
     #jointMotorForceRange: [ -40.0, 40.0 ]
     #jointLockForceRange: [ -40.0, 40.0 ]
     centerOfMass: [ 0, 0, 0 ]
@@ -136,7 +136,7 @@ links:
     jointAxis: [ 0, 1, 0 ]
     jointRange: [ -180, 180 ]
     jointVelocityRange: [ -42.0, 42.0 ]
-    rotorInertia: 0.6
+    rotorInertia: 0.5
     #jointMotorForceRange: [ -40.0, 40.0 ]
     #jointLockForceRange: [ -40.0, 40.0 ]
     centerOfMass: [ 0, 0, 0 ]

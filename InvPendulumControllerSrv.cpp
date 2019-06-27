@@ -55,9 +55,10 @@ public:
     prev_theta_sensor = theta_sensor;
 
     double rl_torque = 0.0;
+#if 1
     {
       ///
-      /// service-call for act theta_sensor, d_theta_sensor, q = siguma dq,  d_phi_act = dq
+      /// service-call for theta_sensor, d_theta_sensor, q = siguma dq,  d_phi_act = dq
       ///
       aizu::Control msg;
 
@@ -75,7 +76,7 @@ public:
         // exit
       }
     }
-
+#endif
     /// using sensor value
     //A = [ 0.0, 1.0, 0.0; 59.8708, 0, 0; -468.554, 0.0, 0.0]
     //B = [0.0; -1.3281; 12.5678]
@@ -85,7 +86,9 @@ public:
     double u_torque = (theta_sensor   * -1119.443) +
                       (d_theta_sensor * -397.636) +
                       ((d_phi_sensor - 0) * -14.142);
-
+    std::cerr << u_torque << " / " << -4 * rl_torque << std::endl;
+    u_torque = -4 * rl_torque;
+    
     /// torque limitation
     if (u_torque >  500) u_torque =  500;
     if (u_torque < -500) u_torque = -500;
@@ -396,7 +399,7 @@ public:
     double rl_torque = 0.0;
     {
       ///
-      /// service-call for act theta_act, d_theta_act, phi_act = q, d_phi_act = dq
+      /// service-call for theta_act, d_theta_act, phi_act = q, d_phi_act = dq
       ///
       aizu::Control msg;
       double  q = (wheel_l->q() + wheel_r->q())/2;
@@ -432,6 +435,9 @@ public:
 
     double dq = (wheel_l->dq() + wheel_r->dq())/2;
     double u_torque = - impl->control(-dq + vx_ref, omega, accel, srv);
+
+    //std::cerr << u_torque << " / " << 4 * rl_torque << std::endl;
+    //u_torque = 4 * rl_torque;
 
     double diff_tq = 5 * (omega.z() - wz_ref);
 

@@ -27,9 +27,10 @@ def ros_service_init ():
     s = rospy.Service('/choreonoid_service', StringString, roscallback)
     ## rospy.spin()
 
-def resetPosition(robotname = "JAXON_RED", pos = [0,0,1.0], rpy = [0,0,0], sleep = 0.2):
+def resetPosition(robotname = "InvPendulum", pos = [0, 0.5, 0.1], rpy = [0,0,0], sleep = 0.1):
     #resetPosition("JAXON_RED", [0, 0, 1.0], [0, 0, 0])
     global thisSimulatorItem
+
     if callable(cnoid.Base.RootItem.instance):
         robotItem = cnoid.Base.RootItem.instance().findItem(robotname)
     else:
@@ -46,12 +47,17 @@ def resetPosition(robotname = "JAXON_RED", pos = [0,0,1.0], rpy = [0,0,0], sleep
 
     trs = numpy.array([[mat[0][0], mat[0][1], mat[0][2], pos[0]],
                        [mat[1][0], mat[1][1], mat[1][2], pos[1]],
-                       [mat[2][0], mat[2][1], mat[2][2], pos[2]]])
+                       [mat[2][0], mat[2][1], mat[2][2], pos[2]],
+                       [        0,         0,         0,      1] ])
 
     thisSimulatorItem.setForcedPosition(robotItem, trs)
-    ##
-    time.sleep(sleep) ##
+    tm = thisSimulatorItem.getCurrentTime()
+    while tm == thisSimulatorItem.getCurrentTime():
+        time.sleep(0.002)
+    thisSimulatorItem.pauseSimulation()
+
     thisSimulatorItem.clearForcedPositions()
+    thisSimulatorItem.restartSimulation()
 
     return '(:success)'
 
@@ -97,3 +103,21 @@ def getCoordinate(robotname = 'InvPendulum', linkname = 'WAIST'):
     return '(:success (make-coords :pos #f(%f %f %f) :rot #2f((%f %f %f) (%f %f %f) (%f %f %f))))'%(pos[0]*1000,pos[1]*1000,pos[2]*1000,rot[0][0],rot[0][1],rot[0][2],rot[1][0],rot[1][1],rot[1][2],rot[2][0],rot[2][1],rot[2][2])
 
 ros_service_init()
+
+# counter = 0
+# thisSimulatorItem = None
+# while True:
+#     time.sleep(5)
+#     robotItem = cnoid.Base.RootItem.instance.find('InvPendulum')
+#     if robotItem == None:
+#         print('(:fail "invalid robotname %s")'%(robotname))
+#     if not thisSimulatorItem:
+#         thisSimulatorItem = cnoid.BodyPlugin.SimulatorItem.findActiveSimulatorItemFor(robotItem)
+#     if thisSimulatorItem == None:
+#         print('(:fail "invalid simulatorItem")')
+#     else:
+#         if counter % 2 == 0:
+#             thisSimulatorItem.stopSimulation()
+#         else:
+#             thisSimulatorItem.startSimulation()
+#     counter = counter + 1

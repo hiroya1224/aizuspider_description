@@ -109,6 +109,15 @@ items:
         ##   name: "WorldRos"
         ##   plugin: RosBody
         ##   class: WorldRosItem
+        -
+          id: 6
+          name: "ros_service_server.py"
+          plugin: Python
+          class: PythonScriptItem
+          data: 
+            file: "${PROJECT_DIR}/ros_service_server.py"
+            executionOnLoading: true
+            backgroundExecution: false
 views: 
   - 
     id: 0
