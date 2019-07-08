@@ -88,6 +88,8 @@ def callback(ptmsg):
 
     name = 'AizuSpiderAA'
 
+    print 'trans[0]', trans[0]
+
     move(name, trans[0], 0)
     if solve_ik(cds):
         do_grasp()
