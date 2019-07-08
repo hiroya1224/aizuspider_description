@@ -21,6 +21,8 @@ import math
 
 name = 'AizuSpiderAA'
 
+print name
+
 rospy.init_node('clicked_point', anonymous=True)
 
 listener = tf.TransformListener()
