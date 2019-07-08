@@ -16,18 +16,6 @@ from geometry_msgs.msg import (
 from pyquaternion import Quaternion
 import math
 
-name = 'AizuSpiderAA'
-
-rospy.init_node('clicked_point', anonymous=True)
-
-listener = tf.TransformListener()
-
-rospy.wait_for_service('%s/grasp'%(name))
-rospy.wait_for_service('%s/solve_ik'%(name))
-
-grasp_srv = rospy.ServiceProxy('%s/grasp'%(name), Grasp)
-solve_ik_srv = rospy.ServiceProxy('%s/solve_ik'%(name), SolveIK)
-
 def do_grasp():
     try:
         res = grasp_srv(position=[math.pi/3, math.pi/3, math.pi/3], time=1000, wait=False)
@@ -92,6 +80,22 @@ def callback(ptmsg):
 
     rospy.signal_shutdown('finished')
 
-rospy.Subscriber("/pointcloud_screenpoint_nodelet/output_point", PointStamped, callback)
 
-rospy.spin()
+def main():
+    name = 'AizuSpiderAA'
+
+    rospy.init_node('clicked_point', anonymous=True)
+
+    listener = tf.TransformListener()
+
+    rospy.wait_for_service('%s/grasp'%(name))
+    rospy.wait_for_service('%s/solve_ik'%(name))
+
+    grasp_srv = rospy.ServiceProxy('%s/grasp'%(name), Grasp)
+    solve_ik_srv = rospy.ServiceProxy('%s/solve_ik'%(name), SolveIK)
+
+    rospy.Subscriber("/pointcloud_screenpoint_nodelet/output_point", PointStamped, callback)
+    rospy.spin()
+
+if __name__=="__main__":
+    main()
