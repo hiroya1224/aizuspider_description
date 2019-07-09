@@ -10,6 +10,7 @@ from aizuspider_description.srv import (
 from geometry_msgs.msg import (
     Pose,
     PointStamped,
+    PoseStamped
     )
 
 
