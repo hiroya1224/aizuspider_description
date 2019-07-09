@@ -82,6 +82,8 @@ def callback(ptmsg):
 
 
 def main():
+    global name, listener, grasp_srv, solve_ik_srv
+
     name = 'AizuSpiderAA'
 
     rospy.init_node('clicked_point', anonymous=True)
