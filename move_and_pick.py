@@ -1,64 +1,21 @@
+#!/usr/bin/env python
+from __future__ import print_function
+
 import click_and_pick as cap
 from move import MovePub
 
-#!/usr/bin/env python
-
 import rospy
 import tf
-
-from aizuspider_description.srv import (
-    Grasp,
-    SolveIK,
-    )
-
-from geometry_msgs.msg import (
-    Pose,
-    PointStamped,
-    )
-
-from pyquaternion import Quaternion
 import math
+import argparse
 
-name = 'AizuSpiderAA'
+from sensor_msgs.msg import Joy
+from geometry_msgs.msg import Twist
+from geometry_msgs.msg import PoseStamped
 
-print name
+msg = """
 
-rospy.init_node('clicked_point', anonymous=True)
-
-listener = tf.TransformListener()
-
-rospy.wait_for_service('%s/grasp'%(name))
-rospy.wait_for_service('%s/solve_ik'%(name))
-
-grasp_srv = rospy.ServiceProxy('%s/grasp'%(name), Grasp)
-solve_ik_srv = rospy.ServiceProxy('%s/solve_ik'%(name), SolveIK)
-
-def do_grasp():
-    try:
-        res = grasp_srv(position=[math.pi/3, math.pi/3, math.pi/3], time=1000, wait=False)
-    except rospy.ServiceException as e:
-        print "Service call failed: %s"%(e)
-        rospy.signal_shutdown('service error')
-
-def solve_ik(cds):
-    try:
-        # cds = Pose()
-        # cds.position.x =  0.424
-        # cds.position.y = -0.1583
-        # cds.position.z = 1.0291
-        # q = Quaternion(axis=[0, 1, 0], angle=0.35)
-        # cds.orientation.w = q.elements[0]
-        # cds.orientation.x = q.elements[1]
-        # cds.orientation.y = q.elements[2]
-        # cds.orientation.z = q.elements[3]
-        res = solve_ik_srv(pose=cds, position_ik=False, move=2000, wait=True)
-        print res
-        dir(res)
-        return res.success
-    except rospy.ServiceException as e:
-        print "Service call failed: %s"%(e)
-        rospy.signal_shutdown('service error')
-    return False
+"""
 
 def callback(ptmsg):
     rospy.loginfo("callback %s", ptmsg)
@@ -88,11 +45,8 @@ def callback(ptmsg):
     cds.orientation.y = 0
     cds.orientation.z = 0
 
-    name = 'AizuSpiderAA'
+    move_to_obj(trans)
 
-    print 'trans[0]', trans[0]
-
-    move(name, trans[0], 0)
     if solve_ik(cds):
         do_grasp()
     else:
@@ -102,7 +56,9 @@ def callback(ptmsg):
 
     rospy.signal_shutdown('finished')
 
-def move(name, trans, rot):
+
+def move_to_obj(trans):
+    ### move mode ###
     rospy.init_node('move_sample')
 
     mv = MovePub(name)
@@ -110,8 +66,22 @@ def move(name, trans, rot):
     rospy.Subscriber('%sground_truth_pose'%(name), PoseStamped, mv.callback)
     mv.wait_first_callback()
 
-    mv.move(trans, rot)
+    mv.move(trans[0], 0)
+    mv.move(0, 0)
+    mv.move(0, 0)
+
+### pick mode ###
+name = 'AizuSpiderAA'
+
+rospy.init_node('clicked_point', anonymous=True)
+
+listener = tf.TransformListener()
+
+rospy.wait_for_service('%s/grasp'%(name))
+rospy.wait_for_service('%s/solve_ik'%(name))
+
+grasp_srv = rospy.ServiceProxy('%s/grasp'%(name), Grasp)
+solve_ik_srv = rospy.ServiceProxy('%s/solve_ik'%(name), SolveIK)
 
 rospy.Subscriber("/pointcloud_screenpoint_nodelet/output_point", PointStamped, callback)
-
 rospy.spin()
