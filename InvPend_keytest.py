@@ -1,5 +1,17 @@
+import rospy
+import tf
 from move import MovePub
 import sys, select, termios, tty
+from aizuspider_description.srv import (
+    Grasp,
+    SolveIK,
+    )
+
+from geometry_msgs.msg import (
+    Pose,
+    PointStamped,
+    )
+
 
 class KeyTest:
     def __init__(self):
