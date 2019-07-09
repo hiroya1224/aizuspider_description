@@ -96,6 +96,6 @@ class KeyTest:
         finally:
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.settings_)
 
-
+name = 'AizuSpiderAA'
 jp = KeyTest()
 jp.main()
